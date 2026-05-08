@@ -21,9 +21,11 @@ r2 = np.array([ d/2, 0.0])
 # ============================================
 # ANFANGSBEDINGUNGEN MOND
 # ============================================
-
-r0 = np.array([0.0, 2.0e7])   # Start oberhalb
-v0 = np.array([3000.0, 0.0])  # vorsichtig wählen!
+x4 = float(input("Abstand Mond zu Systemmittelpunkt in E-M-Abständen [Standard 1]") or 1)
+dmond = x4 * 2.0e7
+r0 = np.array([0.0, dmond])
+v_mond = np.sqrt(G * (M1+M2)/ dmond)# Start oberhalb
+v0 = np.array([v_mond, 0.0])  # vorsichtig wählen!
 
 # ============================================
 # SIMULATION
