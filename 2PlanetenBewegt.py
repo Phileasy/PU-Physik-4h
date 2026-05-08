@@ -18,10 +18,11 @@ M3 = x3 * 7.35e22   # kleiner Körper (Mond)
 # ============================================
 x4 = float(input("Abstand in Anzahl Erdradien [Standard 4]") or 4)
 d = x4 * 6.371e6
-
+x5 = float(input("Abstand Mond zu systemmittelpunkt in E-M-Abständen [Standard 1]") or 1)
+dmond = x5 * 2.0e7
 r1 = np.array([-d/2, 0.0])
 r2 = np.array([ d/2, 0.0])
-r3 = np.array([0.0, 2.0e7])
+r3 = np.array([0.0, dmond])
 
 # ============================================
 # ANFANGSGESCHWINDIGKEITEN
@@ -29,12 +30,13 @@ r3 = np.array([0.0, 2.0e7])
 
 # Kreisbewegung der beiden grossen Planeten um Schwerpunkt
 v = np.sqrt(G * (M1 + M2) / d) / 2
-
-v1 = np.array([0.0, -v])
-v2 = np.array([0.0,  v])
+v_korr = (M1*v + M2* v)/(M1+M2)
+v1 = np.array([0.0, -v+0.5*v_korr])
+v2 = np.array([0.0,  v-0.5*v_korr])
 
 # Mond
-v3 = np.array([3000.0, 0.0])
+v_mond = np.sqrt(G * (M1+M2)/ dmond)
+v3 = np.array([v_mond, 0.0])
 
 # ============================================
 # ZEIT
