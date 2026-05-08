@@ -71,8 +71,10 @@ def f(y):
 y0 = np.concatenate([r1, r2, r3, v1, v2, v3])
 y_heun = np.zeros((n_steps, 12))
 y_rk4  = np.zeros((n_steps, 12))
+
 y_heun[0] = y0
 y_rk4[0]  = y0
+
 # ============================================
 # ZEITSCHLEIFE
 # ============================================
@@ -91,6 +93,7 @@ for i in range(n_steps - 1):
     k4 = f(y_rk4[i] + dt * k3)
 
     y_rk4[i+1] = y_rk4[i] + dt/6 * (k1 + 2*k2 + 2*k3 + k4)
+
 print("Simulation fertig!")
 # ============================================
 # PLOT
